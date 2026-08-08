@@ -176,14 +176,39 @@ const audioStatus = document.querySelector("#audio-status");
 let selectedQuantity = quantities[0];
 let selectedPeriod = periods[1];
 let activeSpeechButton = null;
+let activeRecordedAudio = null;
 let statusTimer = null;
 
-function createAudioButton(label, icon, speech, kind) {
+function audioSlug(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function getVocabularyAudioSources(item, index, type) {
+  const number = String(index + 1).padStart(2, "0");
+  const folder = type === "adverb" ? "01-adverbs" : "02-expressions";
+  const basePath = `audio/${folder}/${number}-${audioSlug(item.term)}`;
+
+  return {
+    term: `${basePath}.mp3`,
+    example: `${basePath}-example.mp3`,
+    alternate: item.alternate
+      ? `audio/${folder}/${number}b-${audioSlug(item.alternate)}.mp3`
+      : ""
+  };
+}
+
+function createAudioButton(label, icon, speech, kind, audioSrc = "") {
   const button = document.createElement("button");
   button.type = "button";
   button.className = `audio-button ${kind === "word" ? "word-audio" : "example-audio"}`;
   button.dataset.speak = speech;
   button.dataset.speechKind = kind;
+  if (audioSrc) button.dataset.audioSrc = audioSrc;
   button.setAttribute("aria-label", `Ouvir ${label.toLowerCase()}: ${speech}`);
 
   const iconSpan = document.createElement("span");
@@ -245,13 +270,26 @@ function createVocabularyRow(item, index, type) {
 
   const audioActions = document.createElement("div");
   audioActions.className = "audio-actions";
+  const audioSources = getVocabularyAudioSources(item, index, type);
   audioActions.append(
-    createAudioButton(type === "adverb" ? "Palavra" : "Expressão", "🔊", item.term, "word"),
-    createAudioButton("Exemplo", "🎧", item.example, "example")
+    createAudioButton(
+      type === "adverb" ? "Palavra" : "Expressão",
+      "🔊",
+      item.term,
+      "word",
+      audioSources.term
+    ),
+    createAudioButton("Exemplo", "🎧", item.example, "example", audioSources.example)
   );
 
   if (item.alternate) {
-    const alternateAudio = createAudioButton("Variação", "🔉", item.alternate, "word");
+    const alternateAudio = createAudioButton(
+      "Variação",
+      "🔉",
+      item.alternate,
+      "word",
+      audioSources.alternate
+    );
     alternateAudio.classList.add("alternate-audio");
     audioActions.append(alternateAudio);
   }
@@ -368,6 +406,42 @@ function clearActiveSpeechButton() {
   activeSpeechButton = null;
 }
 
+function stopRecordedAudio() {
+  if (!activeRecordedAudio) return;
+  activeRecordedAudio.pause();
+  activeRecordedAudio.currentTime = 0;
+  activeRecordedAudio = null;
+}
+
+function playRecordedAudio(src, fallbackText, kind, button) {
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  stopRecordedAudio();
+  clearActiveSpeechButton();
+
+  const audio = new Audio(src);
+  let fallbackStarted = false;
+  activeRecordedAudio = audio;
+  activeSpeechButton = button;
+  button.classList.add("is-playing");
+
+  const finish = () => {
+    if (activeRecordedAudio === audio) activeRecordedAudio = null;
+    if (activeSpeechButton === button) clearActiveSpeechButton();
+  };
+
+  const useFallback = () => {
+    if (fallbackStarted) return;
+    fallbackStarted = true;
+    finish();
+    speak(fallbackText, kind, button);
+  };
+
+  audio.addEventListener("ended", finish, { once: true });
+  audio.addEventListener("error", useFallback, { once: true });
+  const playRequest = audio.play();
+  if (playRequest) playRequest.catch(useFallback);
+}
+
 function speak(text, kind, button) {
   if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
     showStatus("Áudio indisponível neste navegador")
@@ -375,6 +449,7 @@ function speak(text, kind, button) {
   }
 
   window.speechSynthesis.cancel();
+  stopRecordedAudio();
   clearActiveSpeechButton();
 
   const utterance = new SpeechSynthesisUtterance(text);
@@ -398,7 +473,17 @@ function speak(text, kind, button) {
 document.addEventListener("click", (event) => {
   const audioButton = event.target.closest("[data-speak]");
   if (audioButton) {
-    speak(audioButton.dataset.speak, audioButton.dataset.speechKind || "word", audioButton);
+    const speechKind = audioButton.dataset.speechKind || "word";
+    if (audioButton.dataset.audioSrc) {
+      playRecordedAudio(
+        audioButton.dataset.audioSrc,
+        audioButton.dataset.speak,
+        speechKind,
+        audioButton
+      );
+    } else {
+      speak(audioButton.dataset.speak, speechKind, audioButton);
+    }
     return;
   }
 
@@ -436,6 +521,7 @@ combinationTranslationButton.addEventListener("click", () => {
 });
 
 window.addEventListener("beforeunload", () => {
+  stopRecordedAudio();
   if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 });
 
