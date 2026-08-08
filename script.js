@@ -1,73 +1,73 @@
 const adverbs = [
   {
     term: "Always",
-    pronunciation: "(ól-uêiz)",
-    example: "Are you always this busy?",
+    pronunciation: "",
+    example: "Are you always so busy?",
     translation: "Você está sempre tão ocupado assim?"
   },
   {
     term: "Usually",
-    pronunciation: "(iú-jua-li)",
+    pronunciation: "(iú - juâlî)",
     example: "Do you usually have breakfast at home?",
     translation: "Você geralmente toma café da manhã em casa?"
   },
   {
     term: "Normally",
-    pronunciation: "(nór-ma-li)",
+    pronunciation: "(nôrmâlly)",
     example: "I normally finish work at 6",
     translation: "Eu normalmente termino o trabalho às 6"
   },
   {
     term: "Generally",
-    pronunciation: "(djé-na-ra-li)",
+    pronunciation: "(djiê-nâ-ruâ-li)",
     example: "We generally eat dinner together",
     translation: "Geralmente, nós jantamos juntos"
   },
   {
     term: "Often",
-    pronunciation: "(ó-fen / óf-ten)",
+    pronunciation: "(ófen - óften)",
     example: "Do you often use English at work?",
     translation: "Você usa inglês com frequência no trabalho?"
   },
   {
     term: "Frequently",
-    pronunciation: "(frí-kuent-li)",
+    pronunciation: "(FRÚI - quently)",
     example: "This bus is frequently late",
     translation: "Este ônibus se atrasa com frequência"
   },
   {
     term: "Sometimes",
-    pronunciation: "(sâm-taimz)",
+    pronunciation: "",
     example: "I sometimes forget where I put my keys",
     translation: "Às vezes eu esqueço onde coloco minhas chaves"
   },
   {
     term: "Occasionally",
-    pronunciation: "(a-kêi-ja-na-li)",
+    pronunciation: "(ok - jiânalî)",
     example: "We occasionally order food on weekends",
     translation: "Ocasionalmente, nós pedimos comida nos fins de semana"
   },
   {
     term: "Seldom",
-    pronunciation: "(sél-dam)",
+    pronunciation: "",
     example: "I seldom watch TV during the week",
     translation: "Eu raramente assisto TV durante a semana"
   },
   {
     term: "Hardly ever",
-    pronunciation: "(hárd-li é-ver)",
+    pronunciation: "",
     example: "She hardly ever uses cash",
     translation: "Ela quase nunca usa dinheiro"
   },
   {
     term: "Rarely",
-    pronunciation: "(rér-li)",
+    pronunciation: "(ruér-lî)",
     example: "I rarely go to bed late",
     translation: "Eu raramente vou dormir tarde"
   },
   {
     term: "Never",
-    pronunciation: "(né-ver)",
+    pronunciation: "",
     example: "We never share our passwords",
     translation: "Nós nunca compartilhamos nossas senhas"
   }
@@ -76,64 +76,61 @@ const adverbs = [
 const expressions = [
   {
     term: "Every day",
-    pronunciation: "(év-ri dêi)",
+    pronunciation: "",
     alternate: "Almost every day",
-    alternatePronunciation: "(ól-moust év-ri dêi)",
     example: "I check my messages every day",
     translation: "Eu verifico minhas mensagens todos os dias"
   },
   {
     term: "Every week",
-    pronunciation: "(év-ri uík)",
+    pronunciation: "",
     alternate: "Almost every week",
-    alternatePronunciation: "(ól-moust év-ri uík)",
     example: "We have an English class every week",
     translation: "Nós temos uma aula de inglês toda semana"
   },
   {
     term: "Every month",
-    pronunciation: "(év-ri mânf)",
+    pronunciation: "",
     alternate: "Almost every month",
-    alternatePronunciation: "(ól-moust év-ri mânf)",
     example: "She visits her family every month",
     translation: "Ela visita a família todos os meses"
   },
   {
     term: "Every year",
-    pronunciation: "(év-ri iír)",
+    pronunciation: "",
     alternate: "Almost every year",
-    alternatePronunciation: "(ól-moust év-ri iír)",
     example: "Do you travel with your family every year?",
     translation: "Você viaja com a sua família todos os anos?"
   },
   {
     term: "All the time",
-    pronunciation: "(ól dhâ táim)",
+    pronunciation: "",
+    alternate: "Almost all the time",
     example: "I use my phone all the time",
     translation: "Eu uso meu celular o tempo todo"
   },
   {
     term: "Every other day",
-    pronunciation: "(év-ri â-dhâr dêi)",
+    pronunciation: "",
     example: "He works from home every other day",
     translation: "Ele trabalha de casa um dia sim, um dia não"
   }
 ];
 
 const quantities = [
-  { id: "once", label: "Once", pronunciation: "uâns" },
-  { id: "twice", label: "Twice", pronunciation: "tuáis" },
-  { id: "three", label: "Three times", pronunciation: "thrí táimz" },
-  { id: "four", label: "Four times", pronunciation: "fór táimz" },
-  { id: "five", label: "Five times", pronunciation: "fáiv táimz" },
-  { id: "ten", label: "Ten times", pronunciation: "tén táimz" }
+  { id: "once", label: "Once" },
+  { id: "twice", label: "Twice" },
+  { id: "three", label: "Three times" },
+  { id: "four", label: "Four times" },
+  { id: "five", label: "Five times" },
+  { id: "ten", label: "Ten times" }
 ];
 
 const periods = [
-  { id: "day", label: "Day", phrase: "a day", pronunciation: "a dêi" },
-  { id: "week", label: "Week", phrase: "a week", pronunciation: "a uík" },
-  { id: "month", label: "Month", phrase: "a month", pronunciation: "a mânf" },
-  { id: "year", label: "Year", phrase: "a year", pronunciation: "a iír" }
+  { id: "day", label: "Day", phrase: "a day" },
+  { id: "week", label: "Week", phrase: "a week" },
+  { id: "month", label: "Month", phrase: "a month" },
+  { id: "year", label: "Year", phrase: "a year" }
 ];
 
 const combinationExamples = {
@@ -328,7 +325,7 @@ function updateCombination() {
   const [example, translation] = combinationExamples[key];
 
   combinationPhrase.textContent = phrase;
-  combinationPronunciation.textContent = `(${selectedQuantity.pronunciation} ${selectedPeriod.pronunciation})`;
+  combinationPronunciation.textContent = "";
   combinationExample.textContent = example;
   combinationTranslation.textContent = translation;
   combinationTranslation.hidden = true;
