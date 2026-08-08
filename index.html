@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#040816">
+  <meta name="description" content="Advérbios e expressões de frequência em inglês para alunos A1-A2">
+  <title>Frequency | A1-A2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-glow" aria-hidden="true"></div>
+
+  <main class="container">
+    <header class="hero">
+      <div class="hero-left">
+        <div class="title-row">
+          <h1>FREQUENCY</h1>
+          <span class="level-badge">A1–A2</span>
+        </div>
+        <p class="subtitle">Advérbios e expressões de frequência</p>
+      </div>
+
+      <nav class="section-nav" aria-label="Seções da página">
+        <span class="nav-label">SEÇÕES</span>
+        <a href="#adverbs"><span>01</span> Advérbios</a>
+        <a href="#expressions"><span>02</span> Expressões</a>
+      </nav>
+    </header>
+
+    <section id="adverbs" class="content-section accent-violet">
+      <div class="section-heading">
+        <div class="section-number">01</div>
+        <div>
+          <p class="section-kicker">ALWAYS → NEVER</p>
+          <h2>Adverbs of frequency</h2>
+        </div>
+      </div>
+
+      <div class="vocabulary-table">
+        <div class="table-head" aria-hidden="true">
+          <span></span>
+          <span>PALAVRA</span>
+          <span>PRONÚNCIA</span>
+          <span>OUVIR</span>
+          <span>EXEMPLO</span>
+          <span>TRADUÇÃO</span>
+        </div>
+        <div id="adverbs-list"></div>
+      </div>
+    </section>
+
+    <section id="expressions" class="content-section accent-blue">
+      <div class="section-heading">
+        <div class="section-number">02</div>
+        <div>
+          <p class="section-kicker">EVERY DAY · ALL THE TIME</p>
+          <h2>Frequency expressions</h2>
+        </div>
+      </div>
+
+      <div class="vocabulary-table">
+        <div class="table-head" aria-hidden="true">
+          <span></span>
+          <span>EXPRESSÃO</span>
+          <span>PRONÚNCIA</span>
+          <span>OUVIR</span>
+          <span>EXEMPLO</span>
+          <span>TRADUÇÃO</span>
+        </div>
+        <div id="expressions-list"></div>
+      </div>
+
+      <section class="combination-panel" aria-labelledby="combination-title">
+        <div class="combination-heading">
+          <p class="section-kicker">COMBINAÇÕES</p>
+          <h3 id="combination-title">Once, twice and times</h3>
+        </div>
+
+        <div class="combination-builder">
+          <div class="choice-column">
+            <span class="choice-label">FREQUÊNCIA</span>
+            <div id="quantity-options" class="choice-options"></div>
+          </div>
+
+          <div class="connector-column" role="group" aria-label="Conector">
+            <span class="choice-label">CONECTOR</span>
+            <div class="connector-value">a</div>
+          </div>
+
+          <div class="choice-column">
+            <span class="choice-label">PERÍODO</span>
+            <div id="period-options" class="choice-options"></div>
+          </div>
+        </div>
+
+        <article class="combination-result" aria-live="polite">
+          <div class="result-copy">
+            <span class="result-label">RESULTADO</span>
+            <h4 id="combination-phrase">Once a week</h4>
+            <p id="combination-pronunciation" class="result-pronunciation">(uâns a uík)</p>
+          </div>
+
+          <button id="combination-audio" class="audio-button word-audio" type="button">
+            <span aria-hidden="true">🔊</span> Expressão
+          </button>
+
+          <div class="result-example">
+            <p id="combination-example">We have an English class once a week</p>
+            <button id="combination-example-audio" class="audio-button example-audio" type="button">
+              <span aria-hidden="true">🎧</span> Exemplo
+            </button>
+          </div>
+
+          <div class="translation-area">
+            <button id="combination-translation-button" class="translation-button" type="button" aria-expanded="false">
+              Mostrar tradução
+            </button>
+            <p id="combination-translation" class="translation-text" hidden>
+              Nós temos uma aula de inglês uma vez por semana
+            </p>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <footer class="site-footer">
+      <span>Teacher Marcos Vinícius</span>
+      <span>English Mentoring</span>
+    </footer>
+  </main>
+
+  <div id="audio-status" class="audio-status" role="status" aria-live="polite"></div>
+  <script src="script.js" defer></script>
+</body>
+</html>
