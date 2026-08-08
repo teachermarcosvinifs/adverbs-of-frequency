@@ -31,7 +31,7 @@ const adverbs = [
   },
   {
     term: "Frequently",
-    pronunciation: "(FRÚI - quently)",
+    pronunciation: "(fruí - quently)",
     example: "This bus is frequently late",
     translation: "Este ônibus se atrasa com frequência"
   },
