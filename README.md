@@ -13,3 +13,7 @@ O site pode ser publicado diretamente pelo GitHub Pages a partir do branch `main
 - `script.js`: conteúdo, áudio, traduções e combinações
 
 O áudio usa a voz em inglês americano disponível no navegador do aluno.
+
+## Autor
+
+Material de [Marcos Vinicius, professor de inglês online](https://teachermarcosvinifs.github.io/Landing-page-1/).
